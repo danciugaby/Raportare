@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Evaluarea activității didactice {{AN_SEM}}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,500;7..72,650&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<style>
+/* Layout: o coloană de raport (max 1120px) cu bară de navigare lipicioasă; secțiuni numerotate ca în structura raportului CEAC; tabele în containere cu scroll propriu. */
+:root{
+  --bg:#f3f5f8; --surface:#ffffff; --surface-2:#eef1f5; --ink:#141922; --ink-2:#4a5262; --muted:#7a8291;
+  --line:#dce1e8; --line-2:#c6ccd6; --accent:#1d4f91; --accent-soft:#e3ebf6;
+  --lvl-s:#d03b3b; --lvl-m:#b4b9c2; --lvl-r:#2a78d6;
+  --crit:#b42323; --crit-bg:#fbe9e9; --warn:#8a5a00; --warn-bg:#fdf1d8; --ok:#0d6b2f; --ok-bg:#e2f3e7; --info-bg:#e8eef8;
+  --f-display:"Literata",Georgia,"Times New Roman",serif;
+  --f-body:"Public Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1217; --surface:#171b22; --surface-2:#1e232c; --ink:#eef1f5; --ink-2:#b9c0cc; --muted:#8a92a0;
+  --line:#2a303a; --line-2:#3a414d; --accent:#8db4ec; --accent-soft:#1d2a3d;
+  --lvl-s:#e66767; --lvl-m:#5b616c; --lvl-r:#3987e5;
+  --crit:#f08a8a; --crit-bg:#3a1c1e; --warn:#f0c060; --warn-bg:#36290f; --ok:#6fd08f; --ok-bg:#15301f; --info-bg:#1b2533;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1217; --surface:#171b22; --surface-2:#1e232c; --ink:#eef1f5; --ink-2:#b9c0cc; --muted:#8a92a0;
+  --line:#2a303a; --line-2:#3a414d; --accent:#8db4ec; --accent-soft:#1d2a3d;
+  --lvl-s:#e66767; --lvl-m:#5b616c; --lvl-r:#3987e5;
+  --crit:#f08a8a; --crit-bg:#3a1c1e; --warn:#f0c060; --warn-bg:#36290f; --ok:#6fd08f; --ok-bg:#15301f; --info-bg:#1b2533;
+  color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.55}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:20px;padding-block:28px 64px}
+h1,h2,h3{font-family:var(--f-display);font-weight:650;text-wrap:balance;margin:0;color:var(--ink)}
+h1{font-size:clamp(1.7rem,3.6vw,2.4rem);line-height:1.15}
+h2{font-size:1.45rem;line-height:1.25}
+h3{font-size:1.08rem;line-height:1.3;font-family:var(--f-body);font-weight:700}
+p{margin:0;max-width:70ch}
+.num{font-variant-numeric:tabular-nums}
+.eyebrow{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.lead{color:var(--ink-2);font-size:1.02rem}
+header.top{display:grid;gap:12px;padding-bottom:20px;border-bottom:1px solid var(--line)}
+.meta{display:flex;flex-wrap:wrap;gap:8px 18px;color:var(--ink-2);font-size:.88rem}
+.conf{display:flex;gap:10px;align-items:flex-start;background:var(--warn-bg);color:var(--ink);border:1px solid var(--line);border-radius:var(--r);padding:10px 14px;font-size:.88rem}
+.conf b{color:var(--warn)}
+nav.toc{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);margin-inline:-20px;padding:8px 20px;overflow-x:auto;white-space:nowrap}
+nav.toc a{display:inline-block;color:var(--ink-2);text-decoration:none;font-size:.86rem;font-weight:600;padding:6px 10px;border-radius:6px}
+nav.toc a:hover,nav.toc a:focus-visible{background:var(--accent-soft);color:var(--accent);outline:none}
+section{display:grid;gap:18px;padding-block:36px 8px;scroll-margin-top:52px}
+.sec-head{display:grid;gap:6px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;display:grid;gap:4px;align-content:start}
+.kpi .v{font-family:var(--f-display);font-size:1.75rem;line-height:1.1;font-weight:650}
+.kpi .v small{font-size:.95rem;color:var(--muted);font-family:var(--f-body);font-weight:500}
+.kpi .l{font-size:.84rem;color:var(--ink-2)}
+.findings{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+.findings li{display:grid;grid-template-columns:auto 1fr;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 16px}
+.tag{justify-self:start;display:inline-flex;align-items:center;gap:6px;font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:3px 8px;border-radius:999px;white-space:nowrap;height:fit-content}
+.tag.crit{background:var(--crit-bg);color:var(--crit)}
+.tag.warn{background:var(--warn-bg);color:var(--warn)}
+.tag.ok{background:var(--ok-bg);color:var(--ok)}
+.tag.info{background:var(--info-bg);color:var(--accent)}
+.tag::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;display:grid;gap:14px;min-width:0;align-content:start}
+#progTable{min-width:900px}#progTable td:first-child{min-width:230px}#attTable{min-width:720px}#allTable{min-width:860px}#scoreTable{min-width:380px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.note{font-size:.84rem;color:var(--muted)}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-size:.86rem}
+th,td{padding:7px 9px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.74rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700;white-space:nowrap;background:var(--surface)}
+td.r,th.r{text-align:right}
+tbody tr:hover{background:var(--surface-2)}
+.bar{position:relative;height:10px;background:var(--surface-2);border-radius:3px;min-width:80px}
+.bar>i{position:absolute;left:0;top:0;bottom:0;border-radius:3px;background:var(--accent)}
+.stack{display:flex;height:14px;border-radius:4px;overflow:hidden;gap:2px;background:var(--surface)}
+.stack>span{display:block;height:100%}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:.82rem;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:12px;height:12px;border-radius:3px;display:inline-block}
+.dimrow{display:grid;grid-template-columns:minmax(150px,230px) 1fr;gap:6px 14px;align-items:center}
+.dimrow .lbl{font-size:.86rem;font-weight:600}
+.dimrow .lbl small{display:block;font-weight:400;color:var(--muted);font-size:.78rem}
+.pair{display:grid;gap:4px}
+.pair .row{display:grid;grid-template-columns:22px 1fr 44px;gap:8px;align-items:center;font-size:.78rem;color:var(--muted)}
+.pair .row b{color:var(--ink);font-weight:600;text-align:right}
+svg text{fill:var(--ink-2);font-family:var(--f-body);font-size:11px}
+svg .ax{stroke:var(--line-2)}
+svg .grid{stroke:var(--line)}
+.dep{display:grid;gap:10px}
+.dep .big{font-family:var(--f-display);font-size:2rem;font-weight:650;line-height:1}
+.dep dl{display:grid;grid-template-columns:1fr auto;gap:4px 12px;margin:0;font-size:.86rem}
+.dep dt{color:var(--ink-2)} .dep dd{margin:0;font-weight:600}
+.flags{display:grid;gap:10px}
+.flag{display:grid;grid-template-columns:auto 1fr;gap:12px;padding:12px 14px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+.flag h3{font-size:.98rem}
+.flag p{font-size:.88rem;color:var(--ink-2)}
+.flag .src{font-size:.78rem;color:var(--muted)}
+.themes{display:grid;gap:8px}
+.theme{display:grid;grid-template-columns:minmax(0,1fr) 150px 36px;gap:10px;align-items:center;font-size:.88rem}
+.theme .bar{height:12px}
+.theme .bar>i{background:var(--lvl-s)}
+.theme.pos .bar>i{background:var(--lvl-r)}
+ol.measures{margin:0;padding-left:1.3em;display:grid;gap:12px}
+ol.measures li{padding-left:4px}
+ol.measures li b{display:block}
+ol.measures li p{color:var(--ink-2);font-size:.92rem}
+ul.plain{margin:0;padding-left:1.1em;display:grid;gap:6px}
+ul.plain li{font-size:.9rem}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:end}
+.controls label{display:grid;gap:4px;font-size:.76rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+select,input[type=search]{font:inherit;font-size:.88rem;padding:7px 10px;border:1px solid var(--line-2);border-radius:7px;background:var(--surface);color:var(--ink);min-width:0}
+input[type=search]{width:220px;max-width:100%}
+.chk{display:flex!important;align-items:center;gap:6px;text-transform:none!important;letter-spacing:0!important;font-size:.86rem!important;color:var(--ink-2)!important;padding-bottom:7px}
+th button{all:unset;cursor:pointer}
+th button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.pill{display:inline-block;min-width:38px;text-align:center;padding:1px 6px;border-radius:5px;font-weight:600;font-size:.82rem}
+.pill.lo{background:var(--crit-bg);color:var(--crit)}
+.pill.mid{background:var(--warn-bg);color:var(--warn)}
+.pill.hi{background:var(--ok-bg);color:var(--ok)}
+.pill.na{color:var(--muted)}
+.small-n{color:var(--muted);font-size:.78rem}
+#tip{position:fixed;pointer-events:none;z-index:50;background:var(--ink);color:var(--bg);font-size:.8rem;padding:6px 9px;border-radius:6px;max-width:260px;line-height:1.35;opacity:0;transition:opacity .08s}
+#tip.on{opacity:1}
+[data-tip]{cursor:default}
+details{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 16px}
+details summary{cursor:pointer;font-weight:600}
+details[open] summary{margin-bottom:10px}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (max-width:560px){
+  .wrap{padding-inline:16px} nav.toc{margin-inline:-16px;padding-inline:16px}
+  .dimrow{grid-template-columns:1fr}
+  .theme{grid-template-columns:minmax(0,1fr) 90px 30px}
+  .findings li,.flag{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+html{scroll-behavior:smooth}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <div class="eyebrow">Universitatea Transilvania din Brașov · {{FACULTATE}} · uz intern</div>
+  <h1>Evaluarea activității didactice de către studenți — analiză de ansamblu</h1>
+  <p class="lead">Anul universitar {{AN_SEM}}. Analiza pornește de la raportul de sinteză al facultății și verifică fiecare cifră în rapoartele pe program, în tabelele de sinteză și în cele {{N_PDF}} de fișe individuale din arhivă.</p>
+  <div class="meta"><span>Generat automat de analiza_evaluare.py</span><span>Scală: 1 (în foarte mică măsură) – 5 (în foarte mare măsură)</span><span>Niveluri: S scăzut · M mediu · R ridicat</span></div>
+  <div class="conf"><b>Confidențial.</b><span>Pagina conține rezultate nominale ale cadrelor didactice și citate parafrazate din comentariile studenților. Se adresează conducerii departamentelor, CEAC-D și comisiei de analiză.</span></div>
+</header>
+
+<nav class="toc" aria-label="Cuprins">
+  <a href="#rezumat">Rezumat</a><a href="#participare">Participare</a><a href="#rezultate">Rezultate</a><a href="#departamente">Departamente</a><a href="#atentie">Cazuri de analizat</a><a href="#comentarii">Comentarii</a><a href="#date">Calitatea datelor</a><a href="#masuri">Măsuri propuse</a><a href="#fise">Toate fișele</a>
+</nav>
+
+<section id="rezumat">
+  <div class="sec-head"><div class="eyebrow">Rezumat</div><h2>Principalele constatări</h2></div>
+  <div class="kpis" id="kpis"></div>
+  <ul class="findings">
+{{CONSTATARI}}
+  </ul>
+</section>
+
+<section id="participare">
+  <div class="sec-head"><div class="eyebrow">II. Participare și acoperire</div><h2>Câte răspunsuri stau în spatele fiecărei fișe</h2>
+  <p class="lead">Arhiva conține câte o fișă pentru fiecare combinație cadru didactic × disciplină × curs/aplicații × program: {{N_PDF}} de fișe PDF, plus {{N_LIPSA}} fișe care apar în tabelele de sinteză, dar lipsesc din arhivă. {{N_GOALE}} dintre poziții nu au niciun răspuns.</p></div>
+  <div class="grid2">
+    <div class="card">
+      <h3>Fișe după numărul de respondenți (evaluarea din timpul semestrului)</h3>
+      <div id="depthChart"></div>
+      <p class="note">{{N_CU_SEM}} de fișe au cel puțin un răspuns. La n = 1–2, rezultatul este opinia unui singur student sau a doi studenți, iar anonimatul nu mai poate fi garantat.</p>
+    </div>
+    <div class="card">
+      <h3>Evaluarea din sesiune (D8 – respectarea criteriilor de evaluare)</h3>
+      <div class="kpis" style="grid-template-columns:repeat(2,1fr)">
+        <div class="kpi"><div class="v num">{{N_EXAM}}</div><div class="l">răspunsuri în total</div></div>
+        <div class="kpi"><div class="v num">{{N_EXAM1}}<small> / {{N_CU_EXAM}}</small></div><div class="l">fișe cu un singur răspuns</div></div>
+      </div>
+      <p class="note">Media D8 este {{D8}}. Programe cu cel mult 4 răspunsuri în sesiune: {{PROG_FARA_SESIUNE}}.</p>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Acoperire și participare pe program</h3>
+    <div class="legend"><span><i class="sw" style="background:var(--lvl-r)"></i>fișe cu răspunsuri în semestru</span><span><i class="sw" style="background:var(--lvl-m)"></i>doar în sesiune</span><span><i class="sw" style="background:var(--surface-2);border:1px solid var(--line-2)"></i>fără niciun răspuns</span></div>
+    <div class="scroll"><table id="progTable"></table></div>
+    <p class="note">„Răsp./student” = răspunsuri pe parcursul semestrului împărțite la numărul de studenți ai programului. Raportul oficial publică acest raport sub eticheta „Studenți care au completat chestionare (%)”, deși un student poate completa mai multe chestionare. „DEv% oficial” este valoarea din tabelul 1.1, curs/aplicații.</p>
+  </div>
+</section>
+
+<section id="rezultate">
+  <div class="sec-head"><div class="eyebrow">II. Niveluri de performanță</div><h2>Ce apreciază studenții și unde apar nivelurile scăzute</h2>
+  <p class="lead">Tabelele 2 și 3 din raport dau doar media scorurilor în interiorul fiecărui nivel. Aici apare și ponderea respondenților în fiecare nivel, calculată din tabelele de sinteză pe program, plus o medie estimată pe dimensiune.</p></div>
+  <div class="card">
+    <div class="legend"><span><i class="sw" style="background:var(--lvl-s)"></i>S scăzut</span><span><i class="sw" style="background:var(--lvl-m)"></i>M mediu</span><span><i class="sw" style="background:var(--lvl-r)"></i>R ridicat</span><span class="note" id="dimNote"></span></div>
+    <div id="dimChart" style="display:grid;gap:14px"></div>
+    <p class="note">Media estimată = Σ(număr respondenți pe nivel × media nivelului din tabelele 2–3) / total. D7 măsoară implicarea studentului, nu a profesorului.</p>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <h3>Distribuția scorului total D1–D7 pe fișă</h3>
+      <div id="histChart"></div>
+      <p class="note">Coloana închisă: fișe cu cel puțin 5 respondenți. {{N_PESTE45}} din {{N_SCOR}} de fișe cu scor sunt peste 4,5.</p>
+    </div>
+    <div class="card">
+      <h3>Scor mediu ponderat pe program</h3>
+      <div class="scroll"><table id="scoreTable"></table></div>
+      <p class="note">Ponderat cu numărul de respondenți; bara pornește de la 1, minimul scalei. Programele marcate cu * au sub 15 răspunsuri și nu se pretează la comparații.</p>
+    </div>
+  </div>
+</section>
+
+<section id="departamente">
+  <div class="sec-head"><div class="eyebrow">Pe departamente</div><h2>Departamentele, după programele coordonate</h2>
+  <p class="lead">Departamentul este cel care întocmește raportul programului. Cadrele didactice predau și în programele altor departamente, așa că cifrele descriu programele, nu personalul fiecărui departament.</p></div>
+  <div class="grid3" id="depCards"></div>
+</section>
+
+<section id="atentie">
+  <div class="sec-head"><div class="eyebrow">Pentru comisia de analiză</div><h2>Cazuri de analizat</h2>
+  <p class="lead">Două liste separate: fișele cu scoruri scăzute susținute de cel puțin {{PRAG_N}} respondenți și semnalările din comentarii. Ambele sunt puncte de plecare pentru discuții, nu concluzii.</p></div>
+  <div class="card">
+    <h3>Fișe cu scor sub {{PRAG_SCOR}} sau cu cel puțin {{PRAG_S}}% din aprecierile globale la nivel scăzut (n ≥ {{PRAG_N}})</h3>
+    <div class="scroll"><table id="attTable"></table></div>
+    <p class="note">Alte {{N_LOW_SMALL}} fișe au scor sub 3, dar mai puțin de {{PRAG_N}} respondenți. Le găsiți în tabelul complet de la final.</p>
+  </div>
+  <div class="card">
+    <h3>Semnalări din comentariile studenților</h3>
+    {{SEMNALARI}}
+  </div>
+</section>
+
+<section id="comentarii">
+  <div class="sec-head"><div class="eyebrow">Analiză calitativă</div><h2>Ce spun cele {{N_TOT_COM}} de comentarii</h2>
+  <p class="lead">Comentariile provin din {{N_FISE_COM}} de fișe: {{N_PLACUT}} la „Ce v-a plăcut” și {{N_ALTFEL}} la „Ce ați vrea să fie altfel”. După eliminarea răspunsurilor fără conținut („nimic”, „-”, „tot”), rămân {{N_SUBST_POZ}} de aprecieri și {{N_SUBST_NEG}} de observații critice. Barele arată în câte fișe apare fiecare temă.</p></div>
+  <div class="grid2">
+    <div class="card"><h3>Ce ar trebui schimbat</h3><div class="themes" id="negThemes"></div></div>
+    <div class="card"><h3>Ce apreciază studenții</h3><div class="themes" id="posThemes"></div>{{PRACTICI}}</div>
+  </div>
+  <p class="note">{{NOTA_TEME}}</p>
+</section>
+
+<section id="date">
+  <div class="sec-head"><div class="eyebrow">Verificări</div><h2>Reconcilieri și probleme găsite în date</h2></div>
+  <div class="card"><h3>Reconcilieri</h3><ul class="plain">{{RECONCILIERI}}</ul></div>
+  <div class="grid2">{{PROBLEME}}</div>
+</section>
+
+<section id="masuri">
+  <div class="sec-head"><div class="eyebrow">IV. Concluzii și măsuri de îmbunătățire</div><h2>Măsuri propuse</h2>
+  <p class="lead">Pot fi preluate în secțiunea IV a raportului facultății și adaptate pe program.</p></div>
+  <div class="card"><ol class="measures">{{MASURI}}</ol></div>
+</section>
+
+<section id="fise">
+  <div class="sec-head"><div class="eyebrow">Anexă</div><h2>Toate fișele</h2><p class="lead">{{N_FISE}} de poziții. Filtrați după departament, program, tip sau nume. Sortați apăsând pe capul de coloană.</p></div>
+  <div class="card">
+    <div class="controls">
+      <label for="fDep">Departament<select id="fDep"><option value="">Toate</option></select></label>
+      <label for="fProg">Program<select id="fProg"><option value="">Toate</option></select></label>
+      <label for="fTip">Tip<select id="fTip"><option value="">C + A</option><option value="C">Curs</option><option value="A">Aplicații</option></select></label>
+      <label for="fQ">Caută<input type="search" id="fQ" placeholder="cadru didactic sau disciplină"></label>
+      <label class="chk" for="fData"><input type="checkbox" id="fData" checked> doar cu răspunsuri</label>
+    </div>
+    <div class="note" id="fCount"></div>
+    <div class="scroll" style="max-height:620px;overflow-y:auto"><table id="allTable"></table></div>
+  </div>
+  <p class="note">Scorul D1–D7 este cel tipărit în fișă. Nivelul S la D6 este calculat din tabelele de sinteză. Datele complete sunt și în fise.csv, comentarii.csv și date_complete.json.</p>
+</section>
+</div>
+<div id="tip" role="tooltip"></div>
+<script>
+const DATA={{DATA}};
+const $=s=>document.querySelector(s);
+const fmt=(x,d=2)=>x==null?'—':x.toFixed(d).replace('.',',');
+const pct=(a,b)=>b?Math.round(100*a/b):0;
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const T=DATA.tot;
+// KPIs
+$('#kpis').innerHTML=[
+ [T.sem,'răspunsuri în semestru',` + ${T.exam} în sesiune`],
+ [T.stud,'studenți în programele analizate',''],
+ [pct(T.withAny,T.sheets)+'%','din fișe au măcar un răspuns',` (${T.withAny} / ${T.sheets})`],
+ [String(T.median).replace('.',','),'respondenți pe fișă, median',''],
+ [fmt(T.score),'scor mediu ponderat D1–D7',' / 5'],
+ [T.shareR+'%','din aprecieri la nivel ridicat','']
+].map(([v,l,s])=>`<div class="kpi"><div class="v num">${v}<small>${s}</small></div><div class="l">${l}</div></div>`).join('');
+
+// tooltip
+const tip=$('#tip');
+function showTip(e){const t=e.target.closest('[data-tip]');if(!t){tip.classList.remove('on');return}
+ tip.textContent=t.dataset.tip;tip.classList.add('on');
+ const r=t.getBoundingClientRect();let x=(e.clientX||r.left+r.width/2)+12,y=(e.clientY||r.top)+14;
+ const w=tip.offsetWidth,h=tip.offsetHeight;if(x+w>innerWidth-8)x=innerWidth-w-8;if(y+h>innerHeight-8)y=r.top-h-8;tip.style.left=x+'px';tip.style.top=y+'px'}
+document.addEventListener('mousemove',showTip);document.addEventListener('focusin',showTip);
+document.addEventListener('mouseleave',()=>tip.classList.remove('on'));
+document.addEventListener('focusout',()=>tip.classList.remove('on'));
+
+// depth chart (svg bars)
+function barChart(el,items,{key,label,max,h=190,darkKey}){
+ const W=460,H=h,pl=34,pb=26,pt=14,pr=8,iw=W-pl-pr,ih=H-pt-pb;
+ const m=max||Math.max(...items.map(i=>i[key]));const nice=Math.ceil(m/20)*20;const bw=iw/items.length;
+ let s=`<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="${esc(label)}">`;
+ for(let g=0;g<=4;g++){const v=nice*g/4,y=pt+ih-ih*v/nice;s+=`<line class="grid" x1="${pl}" x2="${W-pr}" y1="${y}" y2="${y}"/><text x="${pl-6}" y="${y+4}" text-anchor="end" class="num">${v}</text>`}
+ items.forEach((it,i)=>{const v=it[key],bh=ih*v/nice,x=pl+i*bw+bw*0.18,w=bw*0.64,y=pt+ih-bh;
+  s+=`<g tabindex="0" data-tip="${esc(it.tip)}"><rect x="${pl+i*bw}" y="${pt}" width="${bw}" height="${ih}" fill="transparent"/><rect x="${x}" y="${y}" width="${w}" height="${Math.max(bh,1)}" rx="4" fill="var(--lvl-r)" opacity="${darkKey?0.45:1}"/>`;
+  if(darkKey){const d=it[darkKey],dh=ih*d/nice;s+=`<rect x="${x}" y="${pt+ih-dh}" width="${w}" height="${Math.max(dh,0)}" rx="4" fill="var(--lvl-r)"/>`}
+  s+=`<text x="${x+w/2}" y="${y-4}" text-anchor="middle" class="num" style="fill:var(--ink)">${v}</text><text x="${pl+i*bw+bw/2}" y="${H-8}" text-anchor="middle">${esc(it.l)}</text></g>`});
+ s+=`<line class="ax" x1="${pl}" x2="${W-pr}" y1="${pt+ih}" y2="${pt+ih}"/></svg>`;el.innerHTML=s}
+const totS=DATA.depth.reduce((a,b)=>a+b.sheets,0),totR=DATA.depth.reduce((a,b)=>a+b.resp,0);
+barChart($('#depthChart'),DATA.depth.map(d=>({...d,tip:`${d.l} respondenți: ${d.sheets} fișe (${pct(d.sheets,totS)}%), ${d.resp} răspunsuri (${pct(d.resp,totR)}% din total)`})),{key:'sheets',label:'Fișe după numărul de respondenți'});
+$('#depthChart').insertAdjacentHTML('beforeend','<div class="note" style="text-align:center">număr de respondenți pe fișă → număr de fișe</div>');
+barChart($('#histChart'),DATA.hist.map(h=>({...h,l:`${fmt(h.lo,1)}–${fmt(h.hi,1)}`,tip:`Scor ${fmt(h.lo,1)}–${fmt(h.hi,1)}: ${h.k} fișe, dintre care ${h.k5} cu n ≥ 5`})),{key:'k',label:'Distribuția scorului D1–D7',darkKey:'k5',h:200});
+
+// program table
+const P=DATA.progs;
+$('#progTable').innerHTML=`<thead><tr><th>Program</th><th>Dep.</th><th class="r">Studenți</th><th class="r">Fișe</th><th style="min-width:150px">Acoperire fișe</th><th class="r">Fără răsp.</th><th class="r">Răsp. sem.</th><th class="r">Răsp./student</th><th class="r">Sesiune</th><th class="r">DEv% oficial C / A</th></tr></thead><tbody>`+
+P.map(p=>{const sem=p.withSem,ex=p.withAny-p.withSem,empty=p.sheets-p.withAny;
+ return `<tr><td><b>${esc(p.short)}</b> <span class="small-n">${esc(p.name)}${p.niv==='M'?' · master':''}</span></td><td>${p.dep}</td><td class="r num">${p.stud}</td><td class="r num">${p.sheets}</td>
+ <td><div class="stack" tabindex="0" data-tip="${p.short}: ${sem} fișe cu răspunsuri în semestru, ${ex} doar în sesiune, ${empty} fără niciun răspuns"><span style="width:${pct(sem,p.sheets)}%;background:var(--lvl-r)"></span><span style="width:${pct(ex,p.sheets)}%;background:var(--lvl-m)"></span><span style="flex:1;background:var(--surface-2)"></span></div></td>
+ <td class="r num">${pct(empty,p.sheets)}%</td><td class="r num">${p.sem}</td><td class="r num">${fmt(p.sem/p.stud)}</td><td class="r num">${p.exam}</td><td class="r num">${p.repDEv?p.repDEv.map(v=>Math.round(v)).join(' / '):'—'}</td></tr>`}).join('')+
+`<tr style="font-weight:700"><td>Total facultate</td><td></td><td class="r num">${T.stud}<span class="small-n">*</span></td><td class="r num">${T.sheets}</td><td></td><td class="r num">${pct(T.sheets-T.withAny,T.sheets)}%</td><td class="r num">${T.sem}</td><td class="r num">${fmt(T.sem/T.stud)}</td><td class="r num">${T.exam}</td><td class="r num">${T.facDEv?T.facDEv.map(v=>Math.round(v)).join(' / '):'—'}</td></tr></tbody>`;
+
+// dims
+$('#dimNote').textContent=`C = curs (${DATA.dims[0].C.n} răspunsuri), A = aplicații (${DATA.dims[0].A.n}). D8: ${DATA.dims[7].C.n} / ${DATA.dims[7].A.n} răspunsuri.`;
+$('#dimChart').innerHTML=DATA.dims.map(d=>{
+ const row=t=>{const x=d[t],n=x.n;const seg=['S','M','R'].map(k=>`<span style="width:${100*x[k]/n}%;background:var(--lvl-${k.toLowerCase()})"></span>`).join('');
+  return `<div class="row"><span>${t}</span><div class="stack" tabindex="0" data-tip="${d.id} ${t==='C'?'curs':'aplicații'}: S ${pct(x.S,n)}% · M ${pct(x.M,n)}% · R ${pct(x.R,n)}% (n=${n}); media estimată ${fmt(x.est)}">${seg}</div><b class="num">${fmt(x.est)}</b></div>`};
+ return `<div class="dimrow"><div class="lbl">${d.id}. ${esc(d.name)}<small>S la curs ${pct(d.C.S,d.C.n)}% · la aplicații ${pct(d.A.S,d.A.n)}%</small></div><div class="pair">${row('C')}${row('A')}</div></div>`}).join('');
+
+// score table
+const sp=[...P].filter(p=>p.score!=null).sort((a,b)=>b.score-a.score);
+$('#scoreTable').innerHTML=`<thead><tr><th>Program</th><th class="r">n</th><th style="min-width:110px">D1–D7</th><th class="r">Curs</th><th class="r">Aplic.</th><th class="r">S la D6</th></tr></thead><tbody>`+
+sp.map(p=>{const few=p.sem<15;return `<tr><td><b>${esc(p.short)}</b>${few?'*':''}</td><td class="r num">${p.sem}</td><td><div class="bar" tabindex="0" data-tip="${p.short}: ${fmt(p.score)} (curs ${fmt(p.scoreC)}, aplicații ${fmt(p.scoreA)})"><i style="width:${(p.score-1)/4*100}%;${few?'opacity:.45':''}"></i></div></td><td class="r num">${fmt(p.scoreC)}</td><td class="r num">${fmt(p.scoreA)}</td><td class="r num">${pct(p.d6.S,p.d6.n)}%</td></tr>`}).join('')+`</tbody>`;
+
+
+// departments
+$('#depCards').innerHTML=DATA.deps.map(d=>`<div class="card dep"><div class="eyebrow">${esc(d.progs.join(' · '))}</div><h3>${esc(d.name)}</h3><div class="big num">${fmt(d.score)}<span class="note"> / 5</span></div>
+ <dl><dt>Curs / aplicații</dt><dd class="num">${fmt(d.scoreC)} / ${fmt(d.scoreA)}</dd><dt>Studenți</dt><dd class="num">${d.stud}</dd><dt>Răspunsuri semestru / sesiune</dt><dd class="num">${d.sem} / ${d.exam}</dd><dt>Fișe cu răspunsuri</dt><dd class="num">${d.withAny} / ${d.sheets} (${pct(d.withAny,d.sheets)}%)</dd><dt>Aprecieri globale la nivel S</dt><dd class="num">${pct(d.d6.S,d.d6.n)}%</dd></dl></div>`).join('');
+
+// attention
+const S=DATA.sheets;
+const PR=DATA.prag;
+const att=S.filter(r=>r.n>=PR.n&&r.s!=null&&(r.s<PR.scor||r.sS>=PR.s)).sort((a,b)=>a.s-b.s);
+const pill=s=>s==null?'<span class="pill na">—</span>':`<span class="pill ${s<PR.scor?'lo':s<4.2?'mid':'hi'}">${fmt(s)}</span>`;
+$('#attTable').innerHTML=`<thead><tr><th>Cadru didactic</th><th>Disciplină</th><th>Prog.</th><th>Tip</th><th>An</th><th class="r">n</th><th class="r">D1–D7</th><th class="r">S la D6</th></tr></thead><tbody>`+
+att.map(r=>`<tr><td>${esc(r.cd)}</td><td>${esc(r.d)}</td><td>${r.p}</td><td>${r.t}</td><td>${esc(r.an)}</td><td class="r num">${r.n}</td><td class="r">${pill(r.s)}</td><td class="r num">${r.sS}%</td></tr>`).join('')+'</tbody>';
+
+// themes
+const NEG={{TEME_NEG}}, POS={{TEME_POZ}};
+const MX=Math.max(1,...NEG.map(x=>x[1]),...POS.map(x=>x[1]));
+const th=(arr,cls)=>arr.map(([l,v])=>`<div class="theme ${cls}"><span>${esc(l)}</span><div class="bar" tabindex="0" data-tip="${esc(l)}: ${v} fișe"><i style="width:${100*v/MX}%"></i></div><b class="num">${v}</b></div>`).join('');
+$('#negThemes').innerHTML=th(NEG,'');$('#posThemes').innerHTML=th(POS,'pos');
+
+// full table
+DATA.deps.forEach(d=>$('#fDep').insertAdjacentHTML('beforeend',`<option value="${esc(d.id)}">${esc(d.name)}</option>`));
+const progSel=$('#fProg');[...new Set(S.map(r=>r.p))].forEach(p=>progSel.insertAdjacentHTML('beforeend',`<option>${esc(p)}</option>`));
+let sortK='cd',sortDir=1;
+const cols=[['cd','Cadru didactic'],['d','Disciplină'],['p','Prog.'],['t','Tip'],['an','An'],['n','n sem.','r'],['s','D1–D7','r'],['sS','S la D6','r'],['n8','n sesiune','r'],['s8','D8','r'],['nc','Coment.','r']];
+function render(){
+ const dep=$('#fDep').value,pr=$('#fProg').value,tp=$('#fTip').value,q=$('#fQ').value.trim().toLowerCase(),only=$('#fData').checked;
+ let rows=S.filter(r=>(!dep||r.dep===dep)&&(!pr||r.p===pr)&&(!tp||r.t===tp)&&(!only||r.n||r.n8)&&(!q||(r.cd+' '+r.d).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').includes(q.normalize('NFD').replace(/[̀-ͯ]/g,''))));
+ rows.sort((a,b)=>{let x=a[sortK],y=b[sortK];if(x==null&&y==null)return 0;if(x==null)return 1;if(y==null)return -1;return (typeof x==='string'?x.localeCompare(y,'ro'):x-y)*sortDir});
+ $('#fCount').textContent=`${rows.length} fișe afișate`;
+ $('#allTable').innerHTML=`<thead><tr>${cols.map(([k,l,c])=>`<th class="${c||''}" aria-sort="${k===sortK?(sortDir>0?'ascending':'descending'):'none'}"><button data-k="${k}">${l}${k===sortK?(sortDir>0?' ↑':' ↓'):''}</button></th>`).join('')}</tr></thead><tbody>`+
+ rows.map(r=>`<tr><td>${esc(r.cd)}${r.miss?' <span class="small-n">(fișă lipsă din arhivă)</span>':''}</td><td>${esc(r.d)}</td><td>${r.p}</td><td>${r.t}</td><td>${esc(r.an)}</td><td class="r num">${r.n}</td><td class="r">${r.n?pill(r.s):'<span class="pill na">—</span>'}</td><td class="r num">${r.sS==null?'—':r.sS+'%'}</td><td class="r num">${r.n8}</td><td class="r num">${fmt(r.s8)}</td><td class="r num">${r.nc||''}</td></tr>`).join('')+'</tbody>';
+}
+document.querySelector('#allTable').addEventListener('click',e=>{const b=e.target.closest('button[data-k]');if(!b)return;const k=b.dataset.k;if(k===sortK)sortDir*=-1;else{sortK=k;sortDir=['n','n8','nc'].includes(k)?-1:1}render()});
+['#fDep','#fProg','#fTip','#fQ','#fData'].forEach(s=>$(s).addEventListener('input',render));
+render();
+</script>
+</body>
+</html>
